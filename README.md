@@ -1,28 +1,19 @@
-# AltaCV, yet another LaTeX CV/Résumé class
+# Curriculum Vitae
 
-v1.1.5 (1 December 2018), by LianTze Lim (liantze@gmail.com)
+Design adapted from the [AltaCV LaTeX résumé class](https://github.com/liantze/AltaCV) (v1.1.5), originally by LianTze Lim.
 
-(Thanks to [Nur](https://github.com/nurh) for the name.)
+Note the date of last edit at the bottom of the document.
 
-It all started with this:
+## TODO
 
-[<img src="tweet-that-started-this.png" width="500px">](https://twitter.com/Leonduck/status/764281546408923136)
-
-Leonardo was talking about a [résumé of Marissa Mayer that Business Insider put together](http://www.businessinsider.my/a-sample-resume-for-marissa-mayer-2016-7/) using [enhancv.com](https://enhancv.com).
-I _knew_ I had to do something about it. And so AltaCV was born.
-
-## Samples
-
-This is how the re-created résumé looks like ([view/open on Overleaf](https://www.overleaf.com/latex/examples/recreating-business-insiders-cv-of-marissa-mayer-using-altacv/gtqfpbwncfvp)):
-
-<img src="mmayer.png" alt="Marissa Mayer's résumé, re-created with AltaCV" width="600px">
-
-Though if you're creating your own CV/résumé, you'd probably prefer using the basic template ([view/open on Overleaf](https://www.overleaf.com/latex/templates/altacv-template/trgqjpwnmtgv)):
-
-<img src="sample.png" alt="sample barebones AltaCV template" width="600px">
-
+* Update to latest version of AltaCV. The new version seems to vastly improve the multi-column layout, in particular handling column overflow much better.
+* Add a section for Outreach; include Saturday School teaching & NITheCS online math.
+* Add Hive web project to Personal Projects?
+* Add philosophy and/or other side reading to CV somewhere? Maybe in the bio or Personal Projects?
 
 ## Requirements and Compilation
+
+The following requirements are taken from the [AltaCV GitHub page](https://github.com/liantze/AltaCV):
 
 * pdflatex + biber + pdflatex
 * AltaCV uses [`fontawesome`](http://www.ctan.org/pkg/fontawesome) and [`academicons`](http://www.ctan.org/pkg/academicons); they're included in both TeX Live 2016 and MikTeX 2.9.
