@@ -6,6 +6,7 @@ Note the date of last edit at the bottom of the document.
 
 ## TODO
 
+* Add GitHub action to compile & commit to website repo.
 * Add a section for Outreach; include Saturday School teaching & NITheCS online math.
 * Add Hive web project to Personal Projects?
 * Add philosophy and/or other side reading to CV somewhere? Maybe in the bio or Personal Projects?
