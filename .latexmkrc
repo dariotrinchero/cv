@@ -2,8 +2,6 @@
 # Own config
 # ====================================================================================
 
-@default_files = ('cv.tex');
-
 # Generate PDF output
 $pdf_mode = 1;
 

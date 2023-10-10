@@ -7,8 +7,6 @@ Note the date of last edit at the bottom of the document.
 ## TODO
 
 * Update to latest version of AltaCV. The new version seems to vastly improve the multi-column layout, in particular handling column overflow much better.
-* Add link to personal website (after changing GitHub username & updating home page).
-* Update GitHub handle (after changing GitHub username).
 * Add a section for Outreach; include Saturday School teaching & NITheCS online math.
 * Add Hive web project to Personal Projects?
 * Add philosophy and/or other side reading to CV somewhere? Maybe in the bio or Personal Projects?
