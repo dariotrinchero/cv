@@ -1,5 +1,5 @@
 MK      = latexmk
-TEXC    = lualatex
+TEXC    = pdflatex
 
 COMPILE = $(MK) -pdflatex=$(TEXC) -recorder
 
@@ -13,3 +13,4 @@ bg:
 
 clean:
 	$(MK) -c
+	rm pdfa.xmpi # additional file created by pdfx package
