@@ -1,7 +1,6 @@
 %%%%%%%%%%%%%%%%%
-% This is an example CV created using altacv.cls (v1.1.5, 1 December 2018) written by
-% LianTze Lim (liantze@gmail.com), based on the
-% Cv created by BusinessInsider at http://www.businessinsider.my/a-sample-resume-for-marissa-mayer-2016-7/?r=US&IR=T
+% This is an sample CV template created using altacv.cls
+% (v1.7, 9 August 2023) written by LianTze Lim (liantze@gmail.com). Compiles with pdfLaTeX, XeLaTeX and LuaLaTeX.
 %
 %% It may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
@@ -12,101 +11,155 @@
 %% version 2003/12/01 or later.
 %%%%%%%%%%%%%%%%
 
-%% If you are using \orcid or academicons
-%% icons, make sure you have the academicons
-%% option here, and compile with XeLaTeX
-%% or LuaLaTeX.
-% \documentclass[10pt,a4paper,academicons]{altacv}
-
 %% Use the "normalphoto" option if you want a normal photo instead of cropped to a circle
 % \documentclass[10pt,a4paper,normalphoto]{altacv}
 
-\documentclass[10pt,a4paper,ragged2e,academicons]{altacv}
-
-\usepackage{todonotes}
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=false,
-    allbordercolors=CadetBlue!40,
-    pdfborderstyle={/S/U/W 0.1}
-}
-
-%% AltaCV uses the fontawesome and academicon fonts
-%% and packages.
-%% See texdoc.net/pkg/fontawecome and http://texdoc.net/pkg/academicons for full list of symbols. You MUST compile with XeLaTeX or LuaLaTeX if you want to use academicons.
+\documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
+%% AltaCV uses the fontawesome5 and packages.
+%% See http://texdoc.net/pkg/fontawesome5 for full list of symbols.
 
 % Change the page layout if you need to
-\geometry{left=1.1cm, right=10cm, marginparwidth=7.7cm, marginparsep=0.8cm, top=1.2cm, bottom=1.1cm}
-\usepackage{enumitem}
+\geometry{left=1.20cm,right=1.20cm,top=1.30cm,bottom=1.1cm,columnsep=0.8cm}
+
+% The paracol package lets you typeset columns of text in parallel
+\usepackage{paracol}
 
 % Change the font if you want to, depending on whether
 % you're using pdflatex or xelatex/lualatex
+% WHEN COMPILING WITH XELATEX PLEASE USE
+% xelatex -shell-escape -output-driver="xdvipdfmx -z 0" sample.tex
 \ifxetexorluatex
   % If using xelatex or lualatex:
   \setmainfont{Carlito}
 \else
   % If using pdflatex:
-  \usepackage[utf8]{inputenc}
-  \usepackage[T1]{fontenc}
-  \usepackage[default]{lato}
+  \usepackage[sfdefault,lf]{carlito}
+  %\usepackage[rm]{roboto}
+  %\usepackage[defaultsans]{lato}
+  % \usepackage{sourcesanspro}
+  \renewcommand{\familydefault}{\sfdefault}
 \fi
 
 % Change the colours if you want to
-\definecolor{HeadingColor}{HTML}{131316}
-\definecolor{AccentColor}{HTML}{131316}
-\definecolor{EmphasisColor}{HTML}{131316}
-\definecolor{BodyColor}{HTML}{2E2E2E}
+\definecolor{SlateGrey}{HTML}{2A2A2A}
+\definecolor{LightGrey}{HTML}{383838}
+\definecolor{DarkPastelRed}{HTML}{3D2C35}
+\definecolor{PastelRed}{HTML}{923434}
+\definecolor{GoldenEarth}{HTML}{D3AC6A}
 
-\colorlet{heading}{HeadingColor}
-\colorlet{accent}{AccentColor}
-\colorlet{emphasis}{EmphasisColor}
-\colorlet{body}{BodyColor}
+\colorlet{name}{black}
+\colorlet{tagline}{PastelRed}
+\colorlet{heading}{DarkPastelRed}
+\colorlet{headingrule}{GoldenEarth}
+\colorlet{subheading}{PastelRed}
+\colorlet{accent}{PastelRed}
+\colorlet{emphasis}{SlateGrey}
+\colorlet{body}{LightGrey}
+
+% Change some fonts, if necessary
+\renewcommand{\namefont}{\Huge\bfseries}
+\renewcommand{\personalinfofont}{\small\bfseries}
+\renewcommand{\cvsectionfont}{\LARGE\bfseries}
+\renewcommand{\cvsubsectionfont}{\large\bfseries}
+
 
 % Change the bullets for itemize and rating marker
 % for \cvskill if you want to
-\renewcommand{\itemmarker}{{\small\textbullet}}
-\renewcommand{\ratingmarker}{\faCircle}
+\renewcommand{\cvItemMarker}{{\small\textbullet}}
+\renewcommand{\cvRatingMarker}{\faCircle}
+% ...and the markers for the date/location for \cvevent
+\renewcommand{\cvDateMarker}{\faCalendar*[regular]}
+\renewcommand{\cvLocationMarker}{\faMapMarker*}
+
+
+% If your CV/résumé is in a language other than English,
+% then you probably want to change these so that when you
+% copy-paste from the PDF or run pdftotext, the location
+% and date marker icons for \cvevent will paste as correct
+% translations. For example Spanish:
+% \renewcommand{\locationname}{Ubicación}
+% \renewcommand{\datename}{Fecha}
 
 % Command for last updated
-\newcommand{\updateinfo}[1][\today]{\par\vfill\hfill{\scriptsize\color{BodyColor}Last updated on #1}}
+\newcommand{\updateinfo}[1][\today]{\par\vfill\hfill{\scriptsize\color{LightGrey}Last updated on #1}}
 
-%% .bib file containing your publications
+%% Use (and optionally edit if necessary) this .tex if you
+%% want to use an author-year reference style like APA(6)
+%% for your publication list
+%\input{pubs-authoryear.cfg}
+
+%% Use (and optionally edit if necessary) this .tex if you
+%% want an originally numerical reference style like IEEE
+%% for your publication list
+\input{pubs-num.cfg}
+
+%% sample.bib contains your publications
 \addbibresource{publications.bib}
 
 \begin{document}
 \name{Dario Trinchero}
 \tagline{PhD Candidate in Mathematical Physics}
-% \photo{2.8cm}{profile.jpg}
-\personalinfo{
-% You can add your own with \printinfo{symbol}{detail}
-    \location{\,Cape Town, South Africa}
-    \hspace{0.15em}\email{\href{mailto:dario.trinchero@pm.me}{dario.trinchero@pm.me}}
-    \phone{\href{tel:+27-79-601-4999}{+27 79 601 4999}}
-    \printinfo{\faUser}{ID: 9805065082086}\\
-    \homepage{\href{https://dariotrinchero.github.io}{dariotrinchero.github.io}}
-    \orcid{\href{https://orcid.org/0000-0001-8015-3987}{0000-0001-8015-3987}}
-    \hspace{1.0em}\linkedin{\href{https://www.linkedin.com/in/dariotrinchero/}{dariotrinchero}}
-    \hspace{0.55em}\github{\href{https://github.com/dariotrinchero}{dariotrinchero}}
-    % \mailaddress{}
+%% You can add multiple photos on the left or right
+% \photoR{2.8cm}{Globe_High}
+% \photoL{2.5cm}{Yacht_High,Suitcase_High}
+
+\personalinfo{%
+  % Not all of these are required!
+  \location{Cape Town, South Africa}
+  \email{dario.trinchero@pm.me}
+  \phone{+27 79 601 4999}
+  \printinfo{\faUser}{ID: 9805065082086}\\
+  \homepage{dariotrinchero.github.io}
+  \hspace{0.1em}\orcid{0000-0001-8015-3987}
+  \hspace{0.60em}\linkedin{dariotrinchero}
+  \hspace{0.8em}\github{dariotrinchero}
+  %\twitter{@twitterhandle}
+  %\mailaddress{Åddrésş, Street, 00000 Cóuntry}
+
+  %% You can add your own arbitrary detail with
+  %% \printinfo{symbol}{detail}[optional hyperlink prefix]
+  % \printinfo{\faPaw}{Hey ho!}[https://example.com/]
+  %% Or you can declare your own field with
+  %% \NewInfoFiled{fieldname}{symbol}[optional hyperlink prefix] and use it:
+  % \NewInfoField{gitlab}{\faGitlab}[https://gitlab.com/]
+  % \gitlab{your_id}
+  %%
+  %% For services and platforms like Mastodon where there isn't a
+  %% straightforward relation between the user ID/nickname and the hyperlink,
+  %% you can use \printinfo directly e.g.
+  % \printinfo{\faMastodon}{@username@instace}[https://instance.url/@username]
+  %% But if you absolutely want to create new dedicated info fields for
+  %% such platforms, then use \NewInfoField* with a star:
+  % \NewInfoField*{mastodon}{\faMastodon}
+  %% then you can use \mastodon, with TWO arguments where the 2nd argument is
+  %% the full hyperlink.
+  % \mastodon{@username@instance}{https://instance.url/@username}
 }
 
-%% Make the header extend all the way to the right, if you want.
-\begin{fullwidth}
 \makecvheader
-\end{fullwidth}
-
 %% Depending on your tastes, you may want to make fonts of itemize environments slightly smaller
 \AtBeginEnvironment{itemize}{\small}
 
-%% Provide the file name containing the sidebar contents as an optional parameter to \cvsection.
-%% You can always just use \marginpar{...} if you do
-%% not need to align the top of the contents to any
-%% \cvsection title in the "main" bar.
-\cvsection[sidebar1]{Education}
+%% Set the left/right column width ratio
+\columnratio{0.555}
+
+% Start a 2-column paracol. Both the left and right columns will automatically
+% break across pages if things get too long.
+\begin{paracol}{2}
+
+
+% =======================================================================================================================
+% LEFT COLUMN
+% =======================================================================================================================
+
+
+% -----------------------------------------------------------------------------------------------------------------------
+\cvsection{Education}
+% -----------------------------------------------------------------------------------------------------------------------
 
 \cvevent{Doctorate in Mathematical Physics}{}{Jan 2023 -- present}{Stellenbosch University, ZA}
 \begin{description}
-    \item[Thesis:] \textit{A new isomorphism between the spaces of skeins and holomorphic sections in Chern-Simons theory}
+    \item[Thesis:] \textit{New isomorphism between spaces of skeins \& holomorphic sections in Chern-Simons theory}
 \end{description}
 
 \divider
@@ -147,29 +200,22 @@
     \item[AS-Levels:] English, Afrikaans
 \end{description}
 
-
-% If the NEXT page doesn't start with a \cvsection but you'd still like to add a sidebar,
-% then use this command on THIS page to add it. The optional argument lets you pull up the
-% sidebar a bit so that it looks aligned with the top of the main column.
-%\addnextpagesidebar[-2.3ex]{page2sidebar}
-
-
-
+% -----------------------------------------------------------------------------------------------------------------------
 \cvsection{Skills \& Interests}
-\cvsubsection{General}
+% -----------------------------------------------------------------------------------------------------------------------
 Some of my broad interests, ranked by my aptitude in each:\\
 \vspace{3mm}
-\cvskill{\cvtag{Geometry}\cvtag{Quantum field theory}\cvtag{Computer science}}{5}
+\cvskill{\cvtag{Geometry}\cvtag{Quantum field theory}\cvtag{Programming}}{5}
 \smallskip
 \cvskill{\cvtag{Quantum computing}\cvtag{Algebra}\cvtag{Topology}\cvtag{Lie theory}}{4}
 \smallskip
-\cvskill{\cvtag{Teaching}\cvtag{Debating}\cvtag{Public speaking}\cvtag{Writing}}{3}
+\cvskill{\cvtag{Teaching}\cvtag{Debating}\cvtag{Public speaking}\cvtag{Writing}}{3.5}
 \smallskip
 \cvskill{\cvtag{Cyber-security}\cvtag{Graphic design}\cvtag{Category theory}}{2}
 
-\bigskip
+\smallskip
+\divider
 
-\cvsubsection{Computer Science}
 I have been programming since 2011, and have a strong grasp of algorithms.
 I am comfortable with Unix and the following languages:\\
 \vspace{3mm}
@@ -178,21 +224,101 @@ I am comfortable with Unix and the following languages:\\
 \cvtag{Haskell {\scriptsize\color{gray}(learning)}}\cvtag{Rust {\scriptsize\color{gray}(learning)}}
 
 
-\pagebreak
-\vspace{-1.39em}
+\newpage
+% =======================================================================================================================
+\switchcolumn % RIGHT COLUMN
+% =======================================================================================================================
 
 
-\cvsection[sidebar2]{Research Output}
+% -----------------------------------------------------------------------------------------------------------------------
+\cvsection{Profile}
+% -----------------------------------------------------------------------------------------------------------------------
+
+I am a passionate life-long student, with interests primarily in mathematical physics.
+My long-term dream is to pursue scientific research and lecture my field.
+
+\medskip
+
+I love learning new skills, collaborating and sharing my knowledge with others.
+I am especially passionate about teaching, which I view both as an honour and a moral imperative.
+My knowledge and skills are products of a good deal of privilege, and it is by teaching a broad audience that I
+strive to pay this back.
+
+\medskip
+
+\cvsubsection{Hobbies}
+I enjoy reading, trail-running, cooking, mushroom-hunting, and tabletop games, especially the abstract strategy game
+\href{https://github.com/Doormango/hive}{Hive}.
+
+\medskip
+
+\cvsubsection{Citizenship}
+I am a dual citizen of South Africa and Italy.
+
+\smallskip
+% -----------------------------------------------------------------------------------------------------------------------
+\cvsection{Key Accolades}
+% -----------------------------------------------------------------------------------------------------------------------
+
+\cvachievement{\faUniversity}{}{Globally-competitive results in university courses, A-Levels, and SAT tests}
+\cvachievement{\faTrophy}{}{Numerous awards from Stellenbosch University and associated institutions}
+\cvachievement{\faGraduationCap}{}{Graduated all degrees \emph{cum laude}, including being top of my undergraduate class}
+\cvachievement{\faBook}{}{Author of academic research published in well-known journals}
+
+\smallskip
+% -----------------------------------------------------------------------------------------------------------------------
+\cvsection{Referees}
+% -----------------------------------------------------------------------------------------------------------------------
+
+\cvref{Dr Bruce Bartlett (Hons \& PhD supervisor)}{\href{mailto:bbartlett@sun.ac.za}{bbartlett@sun.ac.za}}
+{Mathematics department\\Stellenbosch University, South Africa}
+
+\divider
+
+\cvref{Prof. Frederik Scholtz (MSc supervisor)}{\href{mailto:fgs@sun.ac.za}{fgs@sun.ac.za}}
+{Physics department\\Stellenbosch University, South Africa}
+
+\divider
+
+\cvref{Dr Johannes Kriel (MSc examiner)}{\href{mailto:hkriel@sun.ac.za}{hkriel@sun.ac.za}}
+{Physics department\\Stellenbosch University, South Africa}
+
+
+% =======================================================================================================================
+\switchcolumn* % LEFT COLUMN
+% =======================================================================================================================
+
+
+% -----------------------------------------------------------------------------------------------------------------------
+\cvsection{Research Output}
+% -----------------------------------------------------------------------------------------------------------------------
+
+%% Specify your last name(s) and first name(s) as given in the .bib to automatically bold your own name in the publications list.
+%% One caveat: You need to write \bibnamedelima where there's a space in your name for this to work properly;
+%% or write \bibnamedelimi if you use initials in the .bib.
+%% You can specify multiple names, especially if you have changed your name or if you need to highlight multiple authors.
+\mynames{Trinchero/Dario, Trinchero/D.}
+%% MAKE SURE THERE IS NO SPACE AFTER THE FINAL NAME IN YOUR \mynames LIST
+
 \nocite{*}
 \AtNextBibliography{\small}
-\printbibliography[heading=pubtype,title={\printinfo{\faFileTextO}{Journal Articles}}, type=article]
+\printbibliography[heading=pubtype,title={\printinfo{\faFile*[regular]}{Journal Articles}},type=article]
+\vspace{-1em}
+\divider
 \AtNextBibliography{\small}
 \printbibliography[heading=pubtype,title={\printinfo{\faGraduationCap}{Theses}}, type=thesis]
+\vspace{-1em}
+\divider
 \AtNextBibliography{\small}
-\printbibliography[heading=pubtype,title={\printinfo{\faCommentsO}{Seminars \& Colloquia}}, type=misc]
+\printbibliography[heading=pubtype,title={\printinfo{\faComments[regular]}{Seminars \& Colloquia}}, type=misc]
 
+%\printbibliography[heading=pubtype,title={\printinfo{\faBook}{Books}},type=book]
+%\printbibliography[heading=pubtype,title={\printinfo{\faUsers}{Conference Proceedings}},type=inproceedings]
 
+% -----------------------------------------------------------------------------------------------------------------------
 \cvsection{Achievements}
+% -----------------------------------------------------------------------------------------------------------------------
+
 % \cvsubsection{2023: Doctorate in Mathematical Physics}
 % \begin{itemize}
 %     \item Bursary: South African Research Chairs Initiative
@@ -201,27 +327,35 @@ I am comfortable with Unix and the following languages:\\
 \cvsubsection{2021--2022: Master's in Physics}
 \begin{itemize}
     \item 100\% for 1 of 3 modules; median mark of 97\%; 89\% for thesis
-    \item Bursaries: \href{https://thecrossleyfoundation.co.za/}{Harry Crossley Foundation} \& \href{http://skyefoundation.co.za/awards/awards-by-year/}{Skye Foundation}
+    \item Bursaries: \href{https://thecrossleyfoundation.co.za/}{Harry Crossley Foundation}
+		\& \href{http://skyefoundation.co.za/awards/awards-by-year/}{Skye Foundation}
 \end{itemize}
 
 \cvsubsection{2020: Honours in Mathematics}
 \begin{itemize}
     \item 100\% for 1 of 11 modules; median mark of 94\%; 95\% for mini thesis
     \item Dean's Medal: highest faculty average across 4 years of study
-    \item Attended \href{https://perimeterinstitute.ca/}{Perimeter Institute of Theoretical Physics'} summer program
+    \item Attended \href{https://perimeterinstitute.ca/}%
+		{Perimeter Institute of Theoretical Physics'} summer program
     \item Bursary: \href{https://www.nrf.ac.za/}{National Research Foundation}
 \end{itemize}
 
 \cvsubsection{2017--2019: Bachelor's in Physics}
 \begin{itemize}
     \item 100\% for 16 of 37 modules; median mark of 99\%
-    \item \href{https://www.sun.ac.za/english/Lists/news/DispForm.aspx?ID=7717}{Rector's Award}: among top students of faculty
+    \item \href{https://www.sun.ac.za/english/Lists/news/DispForm.aspx?ID=7717}{Rector's Award}:
+		among top students of faculty
     \item Rubbi Book Prize: top Mathematics student (2018, 2019)
-    \item Top Computer Science \& \href{https://appliedmaths.sun.ac.za/topachievers.html}{Applied Mathematics} first year
-    \item \href{https://www.sun.ac.za/english/learning-teaching/ctl/t-l-awards-and-grants/first-years-prestige-dinner}{First Year Achievement Awards}: among top first year students
-    \item Winner (in team): \href{https://appliedmaths.sun.ac.za/sammc.html}{South African Mathematical Modelling Contest} (2018)
-    \item Second place (in team): \href{https://www.csc.ac.za/?page_id=665}{\emph{SANReN} Cyber Security Challenge} (2018)
-    \item Bursary: \href{https://finaid.sun.ac.za/merit-bursary}{Stellenbosch University Merit Award} (2018, 2019)
+    \item Top Computer Science \& \href{https://appliedmaths.sun.ac.za/topachievers.html}{Applied Mathematics}
+		first year
+    \item \href{https://www.sun.ac.za/english/learning-teaching/ctl/t-l-awards-and-grants/first-years-prestige-dinner}%
+		{First Year Achievement Awards}: among top first year students
+    \item Winner (in team): \href{https://appliedmaths.sun.ac.za/sammc.html}%
+		{South African Mathematical Modelling Contest} (2018)
+    \item Second place (in team): \href{https://www.csc.ac.za/?page_id=665}%
+		{\emph{SANReN} Cyber Security Challenge} (2018)
+    \item Bursary: \href{https://finaid.sun.ac.za/merit-bursary}%
+		{Stellenbosch University Merit Award} (2018, 2019)
 \end{itemize}
 
 % \cvsubsection{2019: Undergraduate third year}
@@ -254,48 +388,94 @@ I am comfortable with Unix and the following languages:\\
     \item Dux scholar: Somerset College (Cambridge curriculum)
     \item Highest mark globally: AS-level Mathematics
     \item Highest mark in South Africa: AS-level Chemistry
-    \item Perfect SAT scores (800) for Physics \& Mathematics subject tests; score of 1530/1570 for general SAT (with essay)
+    \item Perfect SAT scores (800) for Physics \& Mathematics subject tests;
+		score of 1530/1570 for general SAT (with essay)
     \item A* (``A-star") grade in all A-levels
-    \item Winner (in team): \href{https://sadebating.org/phalaborwa-2016/}{SA National Schools Debating Championship}; placed 10th individually
+    \item Winner (in team): \href{https://sadebating.org/phalaborwa-2016/}{SA National Schools Debating Championship};
+		placed 10th individually
     % \item \emph{Investec} ``Out of the Ordinary" Award
-    \item Finalist: SA \href{https://www.samf.ac.za/en/sa-mathematics-olympiad}{Mathematics} \& \href{https://olympiad.org.za/programming-olympiad/}{Computer Programming} Olympiads
+    \item Finalist: SA \href{https://www.samf.ac.za/en/sa-mathematics-olympiad}{Mathematics}
+		\& \href{https://olympiad.org.za/programming-olympiad/}{Computer Programming} Olympiads
     % \item Competed in regional A-team in \emph{ASSA} Mathematics Team Competition
-    \item Scholarship (Rhodes University): gold medal in \href{https://sacee.org.za/projects/english-olympiad/}{\emph{De Beers} English Olympiad}
+    \item Scholarship (Rhodes University): gold medal in
+		\href{https://sacee.org.za/projects/english-olympiad/}{\emph{De Beers} English Olympiad}
 \end{itemize}
-    
 
+
+% =======================================================================================================================
+\switchcolumn % RIGHT COLUMN
+% =======================================================================================================================
+
+
+% -----------------------------------------------------------------------------------------------------------------------
+\cvsection{Employment}
+% -----------------------------------------------------------------------------------------------------------------------
+\cvevent{Mathematics Course Assistant}{}{Feb 2018 -- present}{Stellenbosch University, ZA}
+\smallskip
+I have tutored the following undergraduate classes (starred are those I currently teach):
+\medskip
+\begin{itemize}
+\item \makebox[4.1em][l]{\emph{3rd year:}} Algebra$^*$, Fredholm theory
+\item \makebox[4.1em][l]{\emph{2nd year:}} Linear algebra$^*$, advanced calculus$^*$, analysis$^*$
+\item \makebox[4.1em][l]{\emph{1st year:}} Linear algebra, calculus
+\end{itemize}
+
+\divider % Remove if over page boundary
+
+\cvevent{Software Development Engineer Intern}{}{\parbox[c]{15em}{\smallskip Nov 2019 -- Feb 2020\\%
+	Dec 2020 -- Feb 2021}}{Amazon Web Services, ZA}
+\smallskip
+I interned twice for \textit{Amazon Web Services} (AWS) where I worked on \textit{Elastic Compute Cloud} (EC2).
+
+\divider % Remove if over page boundary
+
+\cvevent{Private Tutoring}{}{Aug 2017 -- Mar 2018}{Independent, \emph{ad hoc}}
+\smallskip
+Grade 11--12 mathematics, both national curriculum \& advanced programme mathematics.
+
+\medskip
+% -----------------------------------------------------------------------------------------------------------------------
+\cvsection{Personal Projects}
+% -----------------------------------------------------------------------------------------------------------------------
+
+\cvproject{Course Enrichment for 2019}
+\begin{itemize}
+\item I attended an Honours-level course on \textit{Lie theory}, which I applied to Hydrogen-atom physics as
+	part of my 3rd-year abstract mathematics project.
+\item I attended a fluid dynamics course in my spare time.
+\end{itemize}
+\smallskip
+
+\cvproject{\emph{Global Game Jam} \& Other Development}
+\begin{itemize}
+\item Since 2019, a friend and I have partaken in the annual
+	\href{https://globalgamejam.org/about}{\emph{Global Game Jam}}, wherein participants have 3--5 days to design
+	\& build a computer game from scratch.
+\item Having started with no knowledge in \emph{Unity}, \emph{Godot}, \emph{C\#}, or game design, this was
+	a rapid learning experience.
+\item We have independently created several game prototypes since, including a web version of Hive
+	(see my \href{https://github.com/Doormango}{GitHub}).
+\end{itemize}
+\smallskip
+
+\cvproject{Algebra \& Geometry Investigation}
+\begin{itemize}
+\item I spent the holiday of 2017--2018 independently working through every page \& exercise of
+	Alan Beardon's wonderful book,
+	\href{https://www.cambridge.org/za/universitypress/subjects/mathematics/algebra/algebra-and-geometry}%
+	{\emph{Algebra and Geometry}}.
+\item As my introduction to abstract mathematics, it now holds a special place in my heart.
+\end{itemize}
+\smallskip
+
+\cvproject{\emph{Project Euler} Problems}
+\begin{itemize}
+\item An ongoing project of mine (since 2015) is completing programming challenges from the
+	\href{https://projecteuler.net/about}{\emph{Project Euler}} database.
+\item These challenges demand mathematical proficiency \& creativity to solve in the permitted 1min run-time.
+\end{itemize}
+
+\end{paracol}
 % Show last date updated
 \updateinfo
-
-
-%\divider
-
-
-% \cvsection{A Day of My Life}
-
-% % \wheelchart{outer radius}{inner radius}{
-% % comma-separated list of value/text width/color/detail}
-% \wheelchart{1.5cm}{0.5cm}{%
-%   10/10em/accent!30/Sleeping \& dreaming about work,
-%   25/9em/accent!60/Public resolving issues with Yahoo!\ investors,
-%   5/13em/accent!10/\footnotesize\\[1ex]New York \& San Francisco Ballet Jawbone board member,
-%   20/15em/accent!40/Spending time with family,
-%   5/8em/accent!20/\footnotesize Business development for Yahoo!\ after the Verizon acquisition,
-%   30/9em/accent/Showing Yahoo!\ employees that their work has meaning,
-%   5/8em/accent!20/Baking cupcakes
-% }
-
-% \cvsection{Publications}
-
-% \nocite{*}
-
-% \printbibliography[heading=pubtype,title={\printinfo{\faBook}{Books}},type=book]
-
-% \divider
-
-% \printbibliography[heading=pubtype,title={\printinfo{\faFileTextO}{Journal Articles}}, type=article]
-
-% \divider
-
-% \printbibliography[heading=pubtype,title={\printinfo{\faGroup}{Conference Proceedings}},type=inproceedings]
 \end{document}
