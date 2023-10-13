@@ -1,0 +1,38 @@
+name: Build & release CV PDF
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Compile PDF
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: cv.tex
+
+      # TODO this step works: uploaded file is correctly compiled
+      #- name: Upload PDF file
+      #  uses: actions/upload-artifact@v3
+      #  with:
+      #    name: PDF
+      #    path: cv.pdf
+
+      # TODO this step fails every time
+      - name: Update latest release with new PDF
+        uses: IsaacShelton/update-existing-release@v1.3.3
+        with:
+          token: ${{ github.token }}
+          release: "Latest CV PDF"
+          tag: "latest"
+          replace: true
+          files: >
+            cv.pdf
+          body: "This release contains the latest compiled version of my CV as a PDF file"
