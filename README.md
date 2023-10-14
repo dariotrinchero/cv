@@ -5,13 +5,13 @@ Design adapted from the [AltaCV LaTeX résumé class](https://github.com/liantze
 
 ## Compiled output
 
-<!--- 
-Include image preview of compiled CV here using:
-![compiled cv preview](https://dariotrinchero.github.io/files/cv_preview.jpg)
---->
+The compiled CV is available alongside as a GitHub **release**, as well as on my
+[website](https://dariotrinchero.github.io/cv/), or
+[LinkedIn profile](https://www.linkedin.com/in/dariotrinchero/).
 
-The compiled CV is available on my [website](https://dariotrinchero.github.io/cv/), or
-my [LinkedIn profile](https://www.linkedin.com/in/dariotrinchero/).
+Below is a preview of the front page:
+
+![compiled cv preview](https://github.com/dariotrinchero/cv/releases/download/latest/cv-1.jpg)
 
 ## Requirements and Compilation
 

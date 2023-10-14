@@ -18,15 +18,13 @@ jobs:
         with:
           root_file: cv.tex
 
-      # TODO this step works: uploaded file is correctly compiled
-      #- name: Upload PDF file
-      #  uses: actions/upload-artifact@v3
-      #  with:
-      #    name: PDF
-      #    path: cv.pdf
+      - name: Generate front page preview
+        run: |
+          sudo apt-get install poppler-utils
+          pdftoppm -jpeg -f 1 -l 1 cv.pdf cv
+        shell: sh
 
-      # TODO this step fails every time
-      - name: Update latest release with new PDF
+      - name: Update latest release with new PDF & preview
         uses: IsaacShelton/update-existing-release@v1.3.3
         with:
           token: ${{ github.token }}
@@ -35,4 +33,5 @@ jobs:
           replace: true
           files: >
             cv.pdf
+            cv-1.jpg
           body: "This release contains the latest compiled version of my CV as a PDF file"
