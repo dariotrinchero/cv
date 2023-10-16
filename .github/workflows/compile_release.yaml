@@ -1,16 +1,17 @@
-name: Build & release CV PDF
+name: Build, release & push to website
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-release:
+    name: Build PDF & update release
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      - name: Checkout repository
+      - name: Checkout CV repo
         uses: actions/checkout@v3
 
       - name: Compile PDF
@@ -35,3 +36,38 @@ jobs:
             cv.pdf
             cv-1.jpg
           body: "This release contains the latest compiled version of my CV as a PDF file"
+
+      - name: Archive compiled PDF for next job
+        uses: actions/upload-artifact@v3
+        with:
+          name: cv-pdf
+          path: cv.pdf
+
+  push-to-website:
+    name: Push PDF to website
+    needs: build-and-release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          repository: dariotrinchero/dariotrinchero.github.io
+          ref: master
+          token: ${{ secrets.ACTIONS_GITHUB_TOKEN }}
+
+      - name: Retrieve archived PDF
+        uses: actions/download-artifact@v3
+        with:
+          name: cv-pdf
+
+      - name: Commit new PDF
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "dariotrinchero@users.noreply.github.com"
+          mv cv.pdf files/
+          git pull
+          git add files
+          git commit -m "Update CV." || echo "No modifications"
+          git push origin master

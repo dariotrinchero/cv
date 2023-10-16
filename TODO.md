@@ -5,6 +5,7 @@ What follows is a list of CV edits yet to be applied. This is entirely for my ow
 ## Essential changes
 
 - Add section for Outreach; incl Sat School teaching & NITheCS online math
+	- 14/10/2023: joined NITheCS math lesson as panelist (get YT link)
 
 ## Possible changes
 
