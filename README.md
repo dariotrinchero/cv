@@ -1,3 +1,5 @@
+[![Build, release & push to website](https://github.com/dariotrinchero/cv/actions/workflows/compile_release.yaml/badge.svg)](https://github.com/dariotrinchero/cv/actions/workflows/compile_release.yaml)
+
 # Curriculum Vitae
 
 Design adapted from the [AltaCV LaTeX résumé class](https://github.com/liantze/AltaCV)
