@@ -4,9 +4,8 @@ What follows is a list of CV edits yet to be applied. This is entirely for my ow
 
 ## Essential changes
 
-- Add section for Outreach; incl Sat School teaching & NITheCS online math
-	- [14/10/2023](https://youtu.be/Mex5mqEK4RI): joined NITheCS math lesson as panelist
-	- [21/10/2023](https://youtu.be/XjQzTxhgB_s): joined NITheCS math lesson as panelist
+- Add CMND conference & poster
+- Add quaternions talks at Riemann academy, & possibly Cave Wall talk.
 
 ## Possible changes
 
