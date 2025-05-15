@@ -12,7 +12,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout CV repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Compile PDF
         uses: xu-cheng/latex-action@v3
@@ -21,9 +21,10 @@ jobs:
 
       - name: Generate front page preview
         run: |
-          sudo apt-get install poppler-utils
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
           pdftoppm -jpeg -f 1 -l 1 cv.pdf cv
-        shell: sh
+        shell: bash
 
       - name: Update latest release with new PDF & preview
         uses: IsaacShelton/update-existing-release@v1.3.3
@@ -38,7 +39,7 @@ jobs:
           body: "This release contains the latest compiled version of my CV as a PDF file"
 
       - name: Archive compiled PDF for next job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cv-pdf
           path: cv.pdf
@@ -51,14 +52,14 @@ jobs:
       contents: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: dariotrinchero/dariotrinchero.github.io
           ref: master
           token: ${{ secrets.ACTIONS_GITHUB_TOKEN }}
 
       - name: Retrieve archived PDF
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: cv-pdf
 
@@ -67,7 +68,6 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "dariotrinchero@users.noreply.github.com"
           mv cv.pdf files/
-          git pull
           git add files
           git commit -m "Update CV." || echo "No modifications"
           git push origin master
