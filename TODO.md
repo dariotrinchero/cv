@@ -5,7 +5,7 @@ What follows is a list of CV edits yet to be applied. This is entirely for my ow
 ## Essential changes
 
 - Add CMND conference & poster
-- Add quaternions talks at Riemann academy, & possibly Cave Wall talk.
+- Add quaternions talks at Riemann academy.
 
 ## Possible changes
 
