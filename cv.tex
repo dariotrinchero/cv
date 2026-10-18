@@ -24,6 +24,9 @@
 % The paracol package lets you typeset columns of text in parallel
 \usepackage{paracol}
 
+% For \widthof in list options (e.g. aligning wrapped description items with the text after the label)
+\usepackage{calc}
+
 % Change the font if you want to, depending on whether
 % you're using pdflatex or xelatex/lualatex
 % WHEN COMPILING WITH XELATEX PLEASE USE
@@ -177,9 +180,9 @@ was privileged to receive in my own education.
 % -----------------------------------------------------------------------------------------------------------------------
 
 \cvevent{Doctorate in Mathematics}{}{Jan 2023 -- Nov 2026}{Stellenbosch University, ZA}
-\begin{description}
-    \item[Thesis:] \textit{New isomorphism between spaces of skeins \& holomorphic sections in
-	Chern--Simons theory}
+\begin{description}[style=sameline,labelwidth=\widthof{\textbf{Thesis:}},leftmargin=!]
+    \item[Thesis:] \textit{Coherent path states and coloured Jones asymptotics\newline
+	in Chern--Simons theory}
 \end{description}
 
 \divider
