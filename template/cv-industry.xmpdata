@@ -1,2 +1,3 @@
-% PDF metadata for the industry version (see cv.xmpdata, whose \ifindustry branches pick its fields)
+% PDF metadata for the industry version: loads cv.xmpdata (in the main folder), whose \ifindustry branches
+% pick its fields
 \input{cv.xmpdata}

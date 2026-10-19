@@ -1,5 +1,5 @@
 % PDF metadata, read by the pdfx package (which altacv.cls loads) for the academic version; the industry
-% version reads it via cv-industry.xmpdata. A field may span lines but contain no blank line, and no & or %.
+% version reads it via template/cv-industry.xmpdata. A field may span lines but contain no blank line, and no & or %.
 % Keywords are one comma-separated string (pdfx omits the PDF's Keywords entry for a \sep-separated list).
 \Title{Dario Trinchero – Curriculum Vitae}
 \Author{Dario Trinchero}

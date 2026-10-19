@@ -8,7 +8,7 @@ $pdf_mode = 1;
 # Clean up bibtex bbl file
 $bibtex_use = 2;
 
-# Find the template files (class, bibliography styles & PDF metadata) in template/
+# Find the template files (class, bibliography styles & the industry version's wrappers) in template/
 ensure_path('TEXINPUTS', './template//');
 
 # Additional files to clean when run with -c
