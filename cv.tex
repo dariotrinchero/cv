@@ -14,18 +14,19 @@
 %% Use the "normalphoto" option if you want a normal photo instead of cropped to a circle
 % \documentclass[10pt,a4paper,normalphoto]{altacv}
 
-\documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
-%% AltaCV uses the fontawesome5 and packages.
-%% See http://texdoc.net/pkg/fontawesome5 for full list of symbols.
-
 % Academic vs industry version: cv-industry.tex defines \industry, then loads this file.
 % Where the versions differ, each \ifindustry, \else and \fi line ends with a marker naming the
 % version that the (indented) lines after it belong to, optionally followed by a note:
 %   % >>> INDUSTRY   lines only in the industry version
 %   % >>> ACADEMIC   lines only in the academic version (after \else, or after \ifindustry\else)
 %   % >>> BOTH       back to lines shared by both versions (after \fi)
+% This comes before \documentclass, as the class reads the PDF metadata in cv.xmpdata as it loads.
 \newif\ifindustry
 \ifdefined\industry\industrytrue\fi
+
+\documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
+%% AltaCV uses the fontawesome5 and packages.
+%% See http://texdoc.net/pkg/fontawesome5 for full list of symbols.
 
 % Change the page layout if you need to
 \geometry{left=1.20cm,right=1.20cm,top=1.30cm,bottom=1.1cm,columnsep=0.8cm}
@@ -42,6 +43,21 @@
 % Hyphenation points for words TeX would otherwise split badly (e.g. as fron-tend or Dy-namoDB): frontend
 % and backend may break only between their parts, and DynamoDB never
 \hyphenation{front-end back-end DynamoDB}
+
+% Help programs that read the PDF's text (e.g. applicant tracking systems): put real spaces between
+% words, rather than leaving readers to guess them from the gaps (rounding moves text by at most about
+% 0.06bp, which is invisible), and report the ligatures ff, fi, fl, ffi and ffl as separate letters
+\ifdefined\pdfinterwordspaceon
+  \pdfinterwordspaceon
+  \pdfglyphtounicode{uniFB00}{0066 0066}
+  \pdfglyphtounicode{uniFB01}{0066 0069}
+  \pdfglyphtounicode{uniFB02}{0066 006C}
+  \pdfglyphtounicode{uniFB03}{0066 0066 0069}
+  \pdfglyphtounicode{uniFB04}{0066 0066 006C}
+\fi
+
+% Show the PDF's title (from cv.xmpdata) rather than its file name in the viewer's title bar
+\hypersetup{pdfdisplaydoctitle}
 
 % Change the font if you want to, depending on whether
 % you're using pdflatex or xelatex/lualatex
@@ -128,6 +144,10 @@
 % \photoR{2.8cm}{Globe_High}
 % \photoL{2.5cm}{Yacht_High,Suitcase_High}
 
+% A contact field for citizenship, labelled for PDF text extraction like the class's own fields
+\NewInfoField{citizenship}{\faPassport}
+\SetInfoLabel{citizenship}{Citizenship}
+
 % Contact details are set as a grid (see \personalinfo below), each column as wide as its widest
 % entry. An \ifindustry cannot enclose the & of a table, so each version defines its own second row.
 % -----------------------------------------------------------------------------------------------------------------------
@@ -147,7 +167,7 @@
   % Columns are separated by the 3em gap that \printinfo leaves after each entry, plus a space
   \begin{tabular}[t]{@{}l@{\ }l@{\ }l@{\ }l@{}}
     \location{Cape Town, South Africa} & \email{dario.trinchero@pm.me} & \phone{+27 79 601 4999} &
-    \printinfo{\faPassport}{South African \& Italian citizen} \\
+    \citizenship{South African \& Italian citizen} \\
     \contactlinks
   \end{tabular}
   %\twitter{@twitterhandle}

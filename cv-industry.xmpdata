@@ -1,0 +1,2 @@
+% PDF metadata for the industry version (see cv.xmpdata, whose \ifindustry branches pick its fields)
+\input{cv.xmpdata}

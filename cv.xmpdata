@@ -1,0 +1,24 @@
+% PDF metadata, read by the pdfx package (which altacv.cls loads) for the academic version; the industry
+% version reads it via cv-industry.xmpdata. A field may span lines but contain no blank line, and no & or %.
+% Keywords are one comma-separated string (pdfx omits the PDF's Keywords entry for a \sep-separated list).
+\Title{Dario Trinchero – Curriculum Vitae}
+\Author{Dario Trinchero}
+\Language{en-GB}
+\CreatorTool{LaTeX with the AltaCV class}
+% -----------------------------------------------------------------------------------------------------------------------
+\ifindustry % >>> INDUSTRY
+	\Subject{Curriculum vitae of Dario Trinchero, a mathematics PhD candidate at Stellenbosch University, with
+		software development experience at Amazon Web Services and an AI safety research fellowship at PIBBSS.}
+	\Keywords{Dario Trinchero, curriculum vitae, CV, résumé, software development,
+		full-stack development, Python, Java, TypeScript, React, AWS, AI safety,
+		computational learning theory, mathematics, PhD}
+% -----------------------------------------------------------------------------------------------------------------------
+\else % >>> ACADEMIC: also the address where this version is published
+	\Subject{Curriculum vitae of Dario Trinchero, a PhD candidate in mathematics at Stellenbosch University,
+		working in low-dimensional topology and Chern–Simons theory.}
+	\Keywords{Dario Trinchero, curriculum vitae, CV, mathematics, mathematical physics,
+		low-dimensional topology, Chern–Simons theory, topological quantum field theory,
+		quantum groups, skein theory, teaching, Stellenbosch University}
+	\URLlink{https://dariotrinchero.github.io/files/cv.pdf}
+% -----------------------------------------------------------------------------------------------------------------------
+\fi % >>> BOTH

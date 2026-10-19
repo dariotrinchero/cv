@@ -155,22 +155,27 @@
 \NewDocumentCommand{\printinfo}{m m o}{%
   \IfNoValueTF{#3}{%
     \mbox{\textcolor{accent}%
-    {\BeginAccSupp{method=escape,ActualText={\detokenize{#1}:}}\normalfont #1\EndAccSupp{}}%
+    {\BeginAccSupp{method=escape,ActualText={\altacv@infolabel}}\normalfont #1\EndAccSupp{}}%
     ~\utffriendlydetokenize{#2}\hspace{3em}}%
   }{%
      \if@withhyper%
       \mbox{\textcolor{accent}%
-      {\BeginAccSupp{method=escape,ActualText={\detokenize{#1}:}}\normalfont #1\EndAccSupp{}}%
+      {\BeginAccSupp{method=escape,ActualText={\altacv@infolabel}}\normalfont #1\EndAccSupp{}}%
       ~\href{#3}{\utffriendlydetokenize{#2}}\hspace{3em}}
      \else%
        \ClassWarning{Please specify [withhyper] option to enable hyperlinks. Printing out full hyperlink prefix #1 for now.}%
       \mbox{\textcolor{accent}
-      {\BeginAccSupp{method=escape,ActualText={\detokenize{#1}:}}\normalfont #1\EndAccSupp{}}%
+      {\BeginAccSupp{method=escape,ActualText={\altacv@infolabel}}\normalfont #1\EndAccSupp{}}%
       ~{\utffriendlydetokenize{#3#2}}\hspace{3em}}%
      \fi%
   }%
 }%
 
+
+%% added by Dario: what PDF text extraction reports for a field's icon (e.g. "Email:"), rather than the
+%% icon's macro name; an icon given directly to \printinfo is reported as nothing
+\def\altacv@infolabel{}
+\NewDocumentCommand{\SetInfoLabel}{m m}{\csdef{#1 label}{#2}}
 
 %% v1.3: Exploring convenient creation of fields
 %% v1.6: Add starred mode to create \printinfo with full URL
@@ -179,8 +184,10 @@
     \IfNoValueF{#4}{\csdef{#2 hyperprefix}{#4}}%
   }
   \csdef{#2 symbol}{#3}%
+  \csdef{#2 label}{#2}%
   \IfBooleanTF{#1}
     { \csdef{#2}##1##2{%
+        \def\altacv@infolabel{\csuse{#2 label}:}%
         \if@withhyper
           \IfNoValueTF {##2}
             {\printinfo{\csuse{#2 symbol}}{##1}}%
@@ -188,9 +195,11 @@
         \else
           \printinfo{\csuse{#2 symbol}}{##1}%
         \fi%
+        \def\altacv@infolabel{}%
       }%
     }
     { \csdef{#2}##1{%
+        \def\altacv@infolabel{\csuse{#2 label}:}%
         \if@withhyper
           \IfNoValueTF {#4}
             {\printinfo{\csuse{#2 symbol}}{##1}}%
@@ -198,6 +207,7 @@
         \else
           \printinfo{\csuse{#2 symbol}}{##1}%
         \fi%
+        \def\altacv@infolabel{}%
       }%
     }
 }
@@ -216,6 +226,15 @@
 % v1.?? Use fontawesome5 for Orcid symbol
 \NewInfoField{orcid}{\faOrcid}[https://orcid.org/]
 \NewInfoField{location}{\cvLocationMarker}
+\SetInfoLabel{email}{Email}
+\SetInfoLabel{mailaddress}{Address}
+\SetInfoLabel{phone}{Phone}
+\SetInfoLabel{homepage}{Website}
+\SetInfoLabel{twitter}{Twitter}
+\SetInfoLabel{linkedin}{LinkedIn}
+\SetInfoLabel{github}{GitHub}
+\SetInfoLabel{orcid}{ORCID}
+\SetInfoLabel{location}{Location}
 
 % v1.2: Support for multiple photos
 \newlength{\altacv@photos@width}
@@ -315,9 +334,10 @@
 }
 
 % v1.7: adds accsupp for the icon as well
+% added by Dario: PDF text extraction reports the icon as nothing, rather than its macro name
 \newcommand{\cvachievement}[3]{%
   \begin{tabularx}{\linewidth}{@{}p{2em} @{\hspace{1ex}} >{\raggedright\arraybackslash}X@{}}
-  \multirow{4}{*}{\large\color{accent}\BeginAccSupp{method=escape,ActualText={#1: }}#1\EndAccSupp{}} & \bfseries\textcolor{emphasis}{#2}\\
+  \multirow{4}{*}{\large\color{accent}\BeginAccSupp{method=escape,ActualText={}}#1\EndAccSupp{}} & \bfseries\textcolor{emphasis}{#2}\\
   & #3
   \end{tabularx}%
   %\smallskip
