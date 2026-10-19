@@ -139,7 +139,14 @@
 
 \begin{document}
 \name{Dario Trinchero}
-\tagline{PhD Candidate in Mathematics}
+% -----------------------------------------------------------------------------------------------------------------------
+\ifindustry % >>> INDUSTRY: non-specific math, lol
+	\tagline{Mathematician \& Software Developer}
+% -----------------------------------------------------------------------------------------------------------------------
+\else % >>> ACADEMIC:
+	\tagline{PhD Candidate in Mathematics}
+% -----------------------------------------------------------------------------------------------------------------------
+\fi % >>> BOTH
 %% You can add multiple photos on the left or right
 % \photoR{2.8cm}{Globe_High}
 % \photoL{2.5cm}{Yacht_High,Suitcase_High}

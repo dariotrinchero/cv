@@ -34,8 +34,8 @@ and `biber`, and the build process is orchestrated by GNU Make and `latexmk`.
 The following Make targets are implemented:
 
 - `all`: default target; build both versions of the CV
-- `bg`: background compilation; watch files & recompile academic version on changes
-- `bg-industry`: as above, but for the industry version
+- `bg`: background compilation; watch files & recompile both versions on changes
+- `bg-academic`, `bg-industry`: as above, but for one version only
 - `clean`: delete compilation artifacts
 
 The template files (the AltaCV class, bibliography styles, and the industry version's
