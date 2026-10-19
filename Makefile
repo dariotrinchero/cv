@@ -7,16 +7,20 @@ COMPILE = $(MK) -pdflatex=$(TEXC) -recorder
 WATCHERS := $(shell for p in $$(pgrep -x $(MK)); do \
 	[ "$$(readlink /proc/$$p/cwd)" = "$(CURDIR)" ] && echo $$p; done)
 
-.PHONY: all bg clean
+.PHONY: all bg bg-industry clean
 
 ifeq ($(WATCHERS),)
 all:
-	$(COMPILE)
+	$(COMPILE) cv.tex cv-industry.tex
 
+# latexmk can only watch one file, so each version gets its own target
 bg:
-	$(COMPILE) -pvc -interaction=nonstopmode -view=none
+	$(COMPILE) -pvc -interaction=nonstopmode -view=none cv.tex
+
+bg-industry:
+	$(COMPILE) -pvc -interaction=nonstopmode -view=none cv-industry.tex
 else
-all bg:
+all bg bg-industry:
 	@echo "make bg is already running in this folder"
 endif
 

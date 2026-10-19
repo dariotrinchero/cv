@@ -1,0 +1,50 @@
+% =======================================================================================================================
+\cvsection{Skills \& Interests}
+% =======================================================================================================================
+
+% Tag rows use LaTeX's \raggedright (renamed by ragged2e), as \RaggedRight lets them overflow the sidebar
+% -----------------------------------------------------------------------------------------------------------------------
+\ifindustry\else % >>> ACADEMIC: interests first; the industry version leads with programming
+	\cvsubsection{Research interests}
+	{\LaTeXraggedright
+	\cvtag{Chern--Simons theory}\cvtag{TQFT}\cvtag{Skein theory}\cvtag{Theta functions}%
+	\cvtag{Geometric quantisation}\cvtag{Quantum groups}\cvtag{Low-dimensional topology}\par}
+
+	\medskip
+	\smallskip
+	\cvsubsection{Further interests}
+	{\LaTeXraggedright
+	\cvtag{Quantum field theory}\cvtag{Lie theory}\cvtag{Category theory}\cvtag{Quantum computing}\par}
+
+	\medskip
+	\smallskip
+% -----------------------------------------------------------------------------------------------------------------------
+\fi % >>> BOTH
+\cvsubsection{Programming (since 2011)}
+% -----------------------------------------------------------------------------------------------------------------------
+\ifindustry % >>> INDUSTRY
+	I have a strong grasp of algorithms, and am comfortable with:
+
+	\medskip
+% -----------------------------------------------------------------------------------------------------------------------
+\fi % >>> BOTH
+{\LaTeXraggedright
+\cvtag{Python}\cvtag{C/C++}\cvtag{Java}\cvtag{TypeScript}\cvtag{React}%
+\cvtag{x86 Assembly}\cvtag{Ruby}\cvtag{Octave}\cvtag{MATLAB}%
+\cvtag{Mathematica}\cvtag{Rust {\scriptsize\color{gray}(learning)}}\cvtag{\TeX{}}\cvtag{Unix}\par}
+% -----------------------------------------------------------------------------------------------------------------------
+\ifindustry % >>> INDUSTRY: one broader row of interests, after programming
+	\medskip
+	\smallskip
+	\cvsubsection{Mathematics \& physics}
+	{\LaTeXraggedright
+	\cvtag{Computational learning theory}\cvtag{Category theory}\cvtag{Quantum computing}%
+	\cvtag{Quantum field theory}\cvtag{Solid-state physics}\cvtag{Topology}\cvtag{Lie theory}\par}
+
+	\medskip
+	\smallskip
+	\cvsubsection{Communication}
+	{\LaTeXraggedright
+	\cvtag{Teaching}\cvtag{Public speaking}\cvtag{Writing}\cvtag{Debating}\par}
+% -----------------------------------------------------------------------------------------------------------------------
+\fi % >>> BOTH

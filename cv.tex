@@ -18,6 +18,15 @@
 %% AltaCV uses the fontawesome5 and packages.
 %% See http://texdoc.net/pkg/fontawesome5 for full list of symbols.
 
+% Academic vs industry version: cv-industry.tex defines \industry, then loads this file.
+% Where the versions differ, each \ifindustry, \else and \fi line ends with a marker naming the
+% version that the (indented) lines after it belong to, optionally followed by a note:
+%   % >>> INDUSTRY   lines only in the industry version
+%   % >>> ACADEMIC   lines only in the academic version (after \else, or after \ifindustry\else)
+%   % >>> BOTH       back to lines shared by both versions (after \fi)
+\newif\ifindustry
+\ifdefined\industry\industrytrue\fi
+
 % Change the page layout if you need to
 \geometry{left=1.20cm,right=1.20cm,top=1.30cm,bottom=1.1cm,columnsep=0.8cm}
 
@@ -26,6 +35,13 @@
 
 % For \widthof in list options (e.g. aligning wrapped description items with the text after the label)
 \usepackage{calc}
+
+% For \needspace, used by \inputsection to keep section headings with their content
+\usepackage{needspace}
+
+% Hyphenation points for words TeX would otherwise split badly (e.g. as fron-tend or Dy-namoDB): frontend
+% and backend may break only between their parts, and DynamoDB never
+\hyphenation{front-end back-end DynamoDB}
 
 % Change the font if you want to, depending on whether
 % you're using pdflatex or xelatex/lualatex
@@ -101,6 +117,10 @@
 %% sample.bib contains your publications
 \addbibresource{publications.bib}
 
+% =======================================================================================================================
+% DOCUMENT
+% =======================================================================================================================
+
 \begin{document}
 \name{Dario Trinchero}
 \tagline{PhD Candidate in Mathematics}
@@ -108,16 +128,28 @@
 % \photoR{2.8cm}{Globe_High}
 % \photoL{2.5cm}{Yacht_High,Suitcase_High}
 
+% Contact details are set as a grid (see \personalinfo below), each column as wide as its widest
+% entry. An \ifindustry cannot enclose the & of a table, so each version defines its own second row.
+% -----------------------------------------------------------------------------------------------------------------------
+\ifindustry % >>> INDUSTRY: ORCID last, as it matters little outside academia
+	\newcommand{\contactlinks}{%
+		\homepage{dariotrinchero.github.io} & \github{dariotrinchero} & \linkedin{dariotrinchero} &
+		\orcid{0000-0001-8015-3987}}
+% -----------------------------------------------------------------------------------------------------------------------
+\else % >>> ACADEMIC
+	\newcommand{\contactlinks}{%
+		\homepage{dariotrinchero.github.io} & \orcid{0000-0001-8015-3987} & \github{dariotrinchero} &
+		\linkedin{dariotrinchero}}
+% -----------------------------------------------------------------------------------------------------------------------
+\fi % >>> BOTH
+
 \personalinfo{%
-  % Not all of these are required!
-  \location{Cape Town, South Africa}
-  \email{dario.trinchero@pm.me}
-  \phone{+27 79 601 4999}
-  \printinfo{\faPassport}{South African \& Italian citizen}\\
-  \homepage{dariotrinchero.github.io}
-  \hspace{0.1em}\orcid{0000-0001-8015-3987}
-  \hspace{0.8em}\github{dariotrinchero}
-  \hspace{0.60em}\linkedin{dariotrinchero}
+  % Columns are separated by the 3em gap that \printinfo leaves after each entry, plus a space
+  \begin{tabular}[t]{@{}l@{\ }l@{\ }l@{\ }l@{}}
+    \location{Cape Town, South Africa} & \email{dario.trinchero@pm.me} & \phone{+27 79 601 4999} &
+    \printinfo{\faPassport}{South African \& Italian citizen} \\
+    \contactlinks
+  \end{tabular}
   %\twitter{@twitterhandle}
   %\mailaddress{Åddrésş, Street, 00000 Cóuntry}
 
@@ -148,9 +180,15 @@
 %% Set the left/right column width ratio
 \columnratio{0.62}
 
+% Each section lives in sections/<name>.tex. The \needspace moves a section to the next page unless
+% its heading fits with a few lines below it; the \par ends its last paragraph, so a section can be
+% placed anywhere without a stray space from the line end after \inputsection
+\newcommand{\inputsection}[1]{\needspace{8\baselineskip}\input{sections/#1}\par}
+
 % Start a 2-column paracol. The wide left column holds the main content, and simply flows onto the
 % next page like ordinary text. The narrow right column is a sidebar of self-contained boxes; the
-% \newpage in it decides which boxes appear on which page.
+% \newpage in it decides which boxes appear on which page. Below, each version lists its sections
+% in its own order.
 \begin{paracol}{2}
 \global\maincolwidth=\linewidth % used by \updateinfo
 
@@ -159,313 +197,60 @@
 % MAIN COLUMN (LEFT)
 % =======================================================================================================================
 
-
 % -----------------------------------------------------------------------------------------------------------------------
-\cvsection{Profile}
+\ifindustry % >>> INDUSTRY
+	\inputsection{profile}
+	\medskip
+	\inputsection{employment}
+	\medskip
+	\inputsection{education}
+	\medskip
+	\inputsection{research}
+	\medskip
+	\inputsection{teaching}
 % -----------------------------------------------------------------------------------------------------------------------
-
-I am an early-career mathematical physicist working in low-dimensional topology and Chern--Simons
-theory. I aspire toward a position that combines research with lecturing and supervision.
-
-\medskip
-
-I am passionate about teaching: I have tutored undergraduate mathematics since 2018 and
-lectured a large first-year class in 2024, whose students nominated me for a ROCTAS Award as their
-most impactful lecturer. I see teaching as a means to give back the guidance and opportunities I
-was privileged to receive in my own education.
-
-\medskip
+\else % >>> ACADEMIC
+	\inputsection{profile}
+	\medskip
+	\inputsection{education}
+	\medskip
+	\inputsection{research}
+	\medskip
+	\inputsection{teaching}
+	\medskip
+	\inputsection{employment}
 % -----------------------------------------------------------------------------------------------------------------------
-\cvsection{Education}
-% -----------------------------------------------------------------------------------------------------------------------
-
-\cvevent{Doctorate in Mathematics}{}{Jan 2023 -- Nov 2026}{Stellenbosch University, ZA}
-\begin{description}[style=sameline,labelwidth=\widthof{\textbf{Thesis:}},leftmargin=!]
-    \item[Thesis:] \textit{Coherent path states and coloured Jones asymptotics\newline
-	in Chern--Simons theory}
-\end{description}
-
-\divider
-
-\cvevent{Master's in Theoretical Physics}{}{Feb 2021 -- Dec 2022}{Stellenbosch University, ZA}
-\begin{description}
-    \item[Thesis:] \href{https://doi.org/10019.1/126944}{\textit{Pinhole interference in 3D fuzzy space}}
-    \item[Courses:] Quantum information, relativity, solid-state physics
-\end{description}
-
-\divider
-
-\cvevent{Honours in Mathematics}{}{Feb 2020 -- Dec 2020}{Stellenbosch University, ZA}
-\begin{description}
-    \item[Mini Thesis:] \href{https://doi.org/10.5281/zenodo.8414170}{\textit{Generalised Feynman formula for Ising model}}
-    \item[Courses:] Quantum field theory, (functional) analysis
-\end{description}
-
-\divider
-
-\cvevent{Bachelor's in Theoretical Physics}{}{Feb 2017 -- Dec 2019}{Stellenbosch University, ZA}
-\begin{description}
-    \item[Majors:] Mathematics \& physics\,\, (+8 extra modules)
-    %\item[Extra Courses:] \quad
-    %\smallskip
-    %\begin{itemize}
-	%	\setlength{\itemsep}{0.1em}
-    %    \item \makebox[4.1em][l]{\emph{3rd year:}} Algebra, logic, abstract mathematics
-    %    \item \makebox[4.1em][l]{\emph{2nd year:}} Applied mathematics, abstract mathematics
-    %    \item \makebox[4.1em][l]{\emph{1st year:}} Chemistry
-    %\end{itemize}
-\end{description}
-
-\divider
-
-\cvevent{Cambridge International AS- \& A-Levels}{}{Jan 2015 -- Nov 2016}{Somerset College, ZA}
-\begin{description}
-    \item[A-Levels:] Mathematics, physics, computer science, chemistry
-    %\item[AS-Levels:] English, Afrikaans
-\end{description}
-
-\medskip
-% -----------------------------------------------------------------------------------------------------------------------
-\cvsection{Research}
-% -----------------------------------------------------------------------------------------------------------------------
-
-%% Specify your last name(s) and first name(s) as given in the .bib to automatically bold your own name in the publications list.
-%% One caveat: You need to write \bibnamedelima where there's a space in your name for this to work properly;
-%% or write \bibnamedelimi if you use initials in the .bib.
-%% You can specify multiple names, especially if you have changed your name or if you need to highlight multiple authors.
-\mynames{Trinchero/Dario, Trinchero/D.}
-%% MAKE SURE THERE IS NO SPACE AFTER THE FINAL NAME IN YOUR \mynames LIST
-
-\nocite{*}
-\AtNextBibliography{\small}
-\printbibliography[heading=pubtype,title={\printinfo{\faFile*[regular]}{Journal Articles}},type=article]
-\vspace{-1em}
-\divider
-\AtNextBibliography{\small}
-\printbibliography[heading=pubtype,title={\printinfo{\faGraduationCap}{Theses}}, type=thesis]
-%\vspace{-1em}
-%\divider
-\AtNextBibliography{\small}
-\printbibliography[heading=pubtype,title={\printinfo{\faComments[regular]}{Talks \& Posters}}, type=misc]
-%\printbibliography[heading=pubtype,title={\printinfo{\faBook}{Books}},type=book]
-%\printbibliography[heading=pubtype,title={\printinfo{\faUsers}{Conference Proceedings}},type=inproceedings]
-\smallskip
-{\color{accent}\faLink\textbf{Complete list:}}
-	\href{https://dariotrinchero.github.io/talks/}{https://dariotrinchero.github.io/talks/}
-
-\medskip
-% -----------------------------------------------------------------------------------------------------------------------
-\cvsection{Teaching}
-% -----------------------------------------------------------------------------------------------------------------------
-
-\cvevent{Junior Mathematics Lecturer}{}{Feb 2024 -- Jul 2024}{Stellenbosch University, ZA}
-\smallskip
-I lectured calculus part-time to a class of around 220, and set tutorial \& exam questions. My
-students nominated me for a ROCTAS Award in 2025.
-
-\divider
-
-\cvevent{Mathematics Course Assistant}{}{Feb 2018 -- present}{Stellenbosch University, ZA}
-\smallskip
-I \href{https://dariotrinchero.github.io/teaching/2018-math-demi}{tutored}
-these undergraduate classes, sometimes in charge of marking:
-\smallskip
-\begin{itemize}
-	\setlength{\itemsep}{0.1em}
-	\item \makebox[4.1em][l]{\emph{3rd year:}} Algebra, real analysis, Fredholm theory
-	\item \makebox[4.1em][l]{\emph{2nd year:}} Linear algebra, advanced calculus, analysis
-	\item \makebox[4.1em][l]{\emph{1st year:}} Linear algebra, calculus
-\end{itemize}
-
-\vspace{-0.3em}
-\divider
-
-\cvevent{Private Tutoring}{}{Aug 2017 -- Mar 2018}{Independent, \emph{ad hoc}}
-\smallskip
-Grade 11--12 mathematics and physics, both national curriculum \& advanced programme mathematics.
-
-\medskip
-% -----------------------------------------------------------------------------------------------------------------------
-\cvsection{Employment}
-% -----------------------------------------------------------------------------------------------------------------------
-
-\cvevent{AI Safety Research Fellowship}{}{Nov 2026 -- Feb 2027}{PIBBSS, Cape Town, ZA}
-\smallskip
-I was selected for the \href{https://princint.ai/programs/fellowship/}{PIBBSS AI safety
-fellowship} to research computational learning theory, mentored by
-\href{https://coral-research.org/our-team/}{Vanessa Kosoy}.
-
-\divider
-
-\cvevent{Software Development Engineer Intern}{}{\parbox[c]{15em}{\smallskip Nov 2019 -- Feb 2020\\%
-	Dec 2020 -- Feb 2021}}{Amazon Web Services, ZA}
-\smallskip
-I interned twice for \textit{Amazon Web Services} (AWS) where I worked on \textit{Elastic Compute
-Cloud} (EC2).
+\fi % >>> BOTH
 
 
 % =======================================================================================================================
-\switchcolumn % SIDEBAR (RIGHT), PAGE 1
+\switchcolumn % SIDEBAR (RIGHT)
 % =======================================================================================================================
 
-
 % -----------------------------------------------------------------------------------------------------------------------
-\cvsection{Highlights}
+\ifindustry % >>> INDUSTRY
+	\inputsection{highlights}
+	\medskip
+	\inputsection{skills}
+	\bigskip
+	\inputsection{projects}
+	\newpage % page 2
+	\inputsection{achievements}
+	\medskip
+	\inputsection{referees}
 % -----------------------------------------------------------------------------------------------------------------------
-
-\vspace{-.5em}
-{\hyphenpenalty=10000 % no hyphenation in this narrow box
-\cvachievement{\faBook}{}{First-author paper in the \emph{Annals of Physics} (2023)}
-\cvachievement{\faMedal}{}{Dean's Medal for top faculty average; all degrees \emph{cum laude}}
-\cvachievement{\faGlobe}{}{Presented research at Syracuse University and Notre Dame}
-\cvachievement{\faAward}{}{Selected for the PIBBSS research fellowship (2026--27)}
-}
-%\cvachievement{\faUniversity}{}{Globally-competitive results in university courses, including Dean's Medal}
-%\cvachievement{\faTrophy}{}{Numerous awards from Stellenbosch University, including for teaching}
-%\cvachievement{\faGraduationCap}{}{Graduated all degrees \emph{cum laude}, including being top of my undergraduate class}
-%\cvachievement{\faBook}{}{Author of academic research published in the Annals of Physics}
-
-\medskip
+\else % >>> ACADEMIC
+	\inputsection{highlights}
+	\medskip
+	\inputsection{skills}
+	\bigskip
+	\inputsection{referees}
+	\newpage % page 2
+	\inputsection{achievements}
+	\medskip
+	\inputsection{projects}
 % -----------------------------------------------------------------------------------------------------------------------
-\cvsection{Skills \& Interests}
-% -----------------------------------------------------------------------------------------------------------------------
-
-% Tag rows use LaTeX's \raggedright (renamed by ragged2e), as \RaggedRight lets them overflow the sidebar
-\cvsubsection{Research interests}
-{\LaTeXraggedright
-\cvtag{Chern--Simons theory}\cvtag{TQFT}\cvtag{Skein theory}\cvtag{Theta functions}%
-\cvtag{Geometric quantisation}\cvtag{Quantum groups}\cvtag{Low-dimensional topology}\par}
-
-\medskip
-\smallskip
-\cvsubsection{Further interests}
-{\LaTeXraggedright
-\cvtag{Quantum field theory}\cvtag{Lie theory}\cvtag{Category theory}\cvtag{Quantum computing}\par}
-
-\medskip
-\smallskip
-\cvsubsection{Programming (since 2011)}
-%I have been programming since 2011, and have a strong grasp of algorithms.
-%I am comfortable with Unix and the following languages:\\
-%\vspace{3mm}
-{\LaTeXraggedright
-\cvtag{Python}\cvtag{C/C++}\cvtag{Java}\cvtag{x86 Assembly}\cvtag{Ruby}\cvtag{Octave}%
-\cvtag{MATLAB}\cvtag{Mathematica}
-\cvtag{Rust {\scriptsize\color{gray}(learning)}}}
-\cvtag{Web frameworks}\cvtag{\TeX{}}\cvtag{Unix}%
-
-\bigskip
-% -----------------------------------------------------------------------------------------------------------------------
-\cvsection{Referees}
-% -----------------------------------------------------------------------------------------------------------------------
-
-\cvref{Prof.~Bruce Bartlett (Hons \& PhD supervisor)}{\href{mailto:bbartlett@sun.ac.za}{bbartlett@sun.ac.za}}
-{Mathematics department\\Stellenbosch University, South Africa}
-
-\divider
-
-\cvref{Prof.~Frederik Scholtz (MSc supervisor)}{\href{mailto:fgs@sun.ac.za}{fgs@sun.ac.za}}
-{Physics department\\Stellenbosch University, South Africa}
-
-\divider
-
-\cvref{Dr Johannes Kriel (MSc examiner)}{\href{mailto:hkriel@sun.ac.za}{hkriel@sun.ac.za}}
-{Physics department\\Stellenbosch University, South Africa}
-
-
-\newpage
-% =======================================================================================================================
-% SIDEBAR (RIGHT), PAGE 2
-% =======================================================================================================================
-
-
-% -----------------------------------------------------------------------------------------------------------------------
-\cvsection{Achievements}
-% -----------------------------------------------------------------------------------------------------------------------
-
-\cvsubsection{2023--2026: PhD}
-\begin{itemize}
-	\item
-	\href{http://www.sun.ac.za/english/learning-teaching/ctl/t-l-awards-and-grants/roctas}{ROCTAS
-		Award}: students nominate their most impactful lecturer (2025)
-	\item Bursary: \href{https://www.nrf.ac.za/}{National Research Foundation}
-\end{itemize}
-
-\cvsubsection{2021--2022: MSc}
-\begin{itemize}
-    \item 100\% for 1 of 3 modules; median mark of 97\%; 89\% for
-		\href{https://doi.org/10019.1/126944}{thesis}
-    \item Bursaries: \href{https://thecrossleyfoundation.co.za/}{Harry Crossley}
-		\& \href{http://skyefoundation.co.za/awards/awards-by-year/}{Skye} Foundations
-\end{itemize}
-
-\cvsubsection{2020: BSc Hons}
-\begin{itemize}
-    \item 100\% for 1 of 11 modules; median mark of 94\%; 95\% for
-		\href{https://doi.org/10.5281/zenodo.8414170}{mini thesis}
-    \item Dean's Medal: top faculty average over 4 years
-    \item Perimeter Institute:
-		\href{https://dariotrinchero.github.io/files/pi_cert.pdf}{attended summer program}
-    \item Bursary: \href{https://www.nrf.ac.za/}{National Research Foundation}
-\end{itemize}
-
-\cvsubsection{2017--2019: BSc}
-\begin{itemize}
-    \item 100\% for 16 of 37 modules; median mark of 99\%
-    \item \href{https://www.sun.ac.za/english/Lists/news/DispForm.aspx?ID=7717}{Rector's Award}:
-		among top students of faculty
-    \item Rubbi Book Prize: top in Mathematics (2018,~2019)
-    \item Top Computer Science \& \href{https://appliedmaths.sun.ac.za/topachievers.html}{Applied Mathematics}
-		first year
-    \item \href{https://www.sun.ac.za/english/learning-teaching/ctl/t-l-awards-and-grants/first-years-prestige-dinner}%
-		{First Year Achievement Awards}: among top first year students
-    \item Team contests (2018): 1st in \href{https://appliedmaths.sun.ac.za/sammc.html}%
-		{South African Mathematical Modelling Contest}; 2nd in \href{https://www.csc.ac.za/?page_id=665}%
-		{\emph{SANReN} Cyber Security Challenge}
-    \item Bursary: \href{https://finaid.sun.ac.za/merit-bursary}%
-		{Stellenbosch Merit Award} (2018,~2019)
-\end{itemize}
-
-\cvsubsection{2015--2016: A-levels}
-\begin{itemize}
-    \item Dux scholar: Somerset College (Cambridge)
-    \item Top marks for AS-levels: Mathematics (globally), Chemistry (South Africa)
-    %\item \href{https://dariotrinchero.github.io/files/sat1.pdf}{Perfect SAT scores (800)} for Physics \&
-	%	Mathematics; \href{https://dariotrinchero.github.io/files/sat2.pdf}{score of 1530/1570} for
-	%	general SAT (with essay)
-    %\item A* (``A-star") grade in all A-levels
-    %\item Winning team: \href{https://sadebating.org/phalaborwa-2016/}{SA National Debating Championship};
-	%	10\textsuperscript{th} individually
-    %\item Finalist: SA \href{https://www.samf.ac.za/en/sa-mathematics-olympiad}{Mathematics}
-	%	\& \href{https://olympiad.org.za/programming-olympiad/}{Computer Programming} Olympiads
-    %\item Scholarship (Rhodes University): gold medal in
-	%	\href{https://sacee.org.za/projects/english-olympiad/}{\emph{De Beers} English Olympiad}
-\end{itemize}
-
-\medskip
-% -----------------------------------------------------------------------------------------------------------------------
-\cvsection{Personal Projects}
-% -----------------------------------------------------------------------------------------------------------------------
-
-\begin{itemize}
-	\setlength{\itemsep}{0.5em}
-	\item \textbf{isiXhosa} (since 2025): self-studying this language, widely spoken in my home city
-		of Cape Town.
-	\item \textbf{Philosophy} (since 2021): working through papers \& textbooks; I gave a
-		\href{https://dariotrinchero.github.io/talks/2024-08-30-modal}{talk} on a famous (alleged)
-		mathematical proof of God.
-	\item \textbf{Game development} (since 2019): annual
-		\href{https://globalgamejam.org/about}{\emph{Global Game Jam}}, and several prototypes of my
-		own, such as a web version of \href{https://github.com/dariotrinchero/hive}{Hive}.
-	\item \textbf{Coding challenges} (since 2015): solving
-		\href{https://projecteuler.net/about}{\emph{Project Euler}} problems.
-\end{itemize}
-
-\medskip
-
-\cvsubsection{Hobbies}
-I enjoy reading, cooking, trail-running, rock-climbing, and tabletop games, especially the abstract
-strategy game \href{https://github.com/dariotrinchero/hive}{Hive}.
+\fi % >>> BOTH
 
 \end{paracol}
 % Show last date updated

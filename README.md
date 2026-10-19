@@ -15,6 +15,16 @@ Below is a preview of the front page:
 
 ![compiled cv preview](https://github.com/dariotrinchero/cv/releases/download/latest/cv-1.jpg)
 
+## Academic and industry versions
+
+The CV comes in two versions, both built from `cv.tex`. Compiling `cv.tex` directly gives
+the academic version (`cv.pdf`), which is the one published above. Compiling `cv-industry.tex`
+gives the industry version (`cv-industry.pdf`), which is built locally only.
+
+Each section lives in its own file under `sections/`, and `cv.tex` lists the order of the
+sections for each version. Content that differs between the two versions is wrapped in
+`\ifindustry ... \else ... \fi` within the section files.
+
 ## Requirements and Compilation
 
 Detailed dependencies can be found on the
@@ -22,8 +32,9 @@ Detailed dependencies can be found on the
 and `biber`, and the build process is orchestrated by GNU Make and `latexmk`.
 The following Make targets are implemented:
 
-- `all`: default target; build CV
-- `bg`: background compilation; watch files & recompile on changes
+- `all`: default target; build both versions of the CV
+- `bg`: background compilation; watch files & recompile academic version on changes
+- `bg-industry`: as above, but for the industry version
 - `clean`: delete compilation artifacts
 
 Note that AltaCV uses [`fontawesome5`](https://ctan.org/pkg/fontawesome5), but this

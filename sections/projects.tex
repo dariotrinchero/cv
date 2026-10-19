@@ -1,0 +1,51 @@
+% =======================================================================================================================
+\cvsection{Personal Projects}
+% =======================================================================================================================
+
+% The industry version lists the coding projects first, in more detail
+\newcommand{\codingprojects}{%
+	% -------------------------------------------------------------------------------------------------------------------
+	\ifindustry % >>> INDUSTRY
+		\item \textbf{Game development} (since 2019): annual
+			\href{https://globalgamejam.org/about}{\emph{Global Game Jam}}, where teams build a game from
+			scratch in 3--5 days; several prototypes of my own, such as a web version of
+			\href{https://github.com/dariotrinchero/hive}{Hive}.
+		\item \textbf{Coding challenges} (since 2015): solving
+			\href{https://projecteuler.net/about}{\emph{Project Euler}} problems, which demand mathematical
+			creativity to solve within a 1-minute run-time.
+	% -------------------------------------------------------------------------------------------------------------------
+	\else % >>> ACADEMIC
+		\item \textbf{Game development} (since 2019): annual
+			\href{https://globalgamejam.org/about}{\emph{Global Game Jam}}, and several prototypes of my
+			own, such as a web version of \href{https://github.com/dariotrinchero/hive}{Hive}.
+		\item \textbf{Coding challenges} (since 2015): solving
+			\href{https://projecteuler.net/about}{\emph{Project Euler}} problems.
+	% -------------------------------------------------------------------------------------------------------------------
+	\fi % >>> BOTH
+}
+
+\smallskip
+\begin{itemize}
+	\setlength{\itemsep}{0.5em}
+	% -------------------------------------------------------------------------------------------------------------------
+	\ifindustry % >>> INDUSTRY: coding projects first
+		\codingprojects
+	% -------------------------------------------------------------------------------------------------------------------
+	\fi % >>> BOTH
+	\item \textbf{isiXhosa} (since 2025): self-studying this language, widely spoken in my home city
+		of Cape Town.
+	\item \textbf{Philosophy} (since 2021): working through papers \& textbooks; I gave a
+		\href{https://dariotrinchero.github.io/talks/2024-08-30-modal}{talk} on a famous (alleged)
+		mathematical proof of God.
+	% -------------------------------------------------------------------------------------------------------------------
+	\ifindustry\else % >>> ACADEMIC: coding projects last
+		\codingprojects
+	% -------------------------------------------------------------------------------------------------------------------
+	\fi % >>> BOTH
+\end{itemize}
+
+\medskip
+
+\cvsubsection{Hobbies}
+I enjoy reading, cooking, trail-running, rock-climbing, and tabletop games, especially the abstract
+strategy game \href{https://github.com/dariotrinchero/hive}{Hive}.

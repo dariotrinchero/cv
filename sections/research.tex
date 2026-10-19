@@ -1,0 +1,38 @@
+% =======================================================================================================================
+\cvsection{Research}
+% =======================================================================================================================
+
+%% Specify your last name(s) and first name(s) as given in the .bib to automatically bold your own name in the publications list.
+%% One caveat: You need to write \bibnamedelima where there's a space in your name for this to work properly;
+%% or write \bibnamedelimi if you use initials in the .bib.
+%% You can specify multiple names, especially if you have changed your name or if you need to highlight multiple authors.
+\mynames{Trinchero/Dario, Trinchero/D.}
+%% MAKE SURE THERE IS NO SPACE AFTER THE FINAL NAME IN YOUR \mynames LIST
+
+\nocite{*}
+\AtNextBibliography{\small}
+\printbibliography[heading=pubtype,title={\printinfo{\faFile*[regular]}{Journal Articles}},type=article]
+\vspace{-1em}
+\divider
+\AtNextBibliography{\small}
+\printbibliography[heading=pubtype,title={\printinfo{\faGraduationCap}{Theses}}, type=thesis]
+%\vspace{-1em}
+%\divider
+% -----------------------------------------------------------------------------------------------------------------------
+\ifindustry\else % >>> ACADEMIC: the industry version only links to the talks, below
+	\AtNextBibliography{\small}
+	\printbibliography[heading=pubtype,title={\printinfo{\faComments[regular]}{Talks \& Posters}}, type=misc]
+% -----------------------------------------------------------------------------------------------------------------------
+\fi % >>> BOTH
+%\printbibliography[heading=pubtype,title={\printinfo{\faBook}{Books}},type=book]
+%\printbibliography[heading=pubtype,title={\printinfo{\faUsers}{Conference Proceedings}},type=inproceedings]
+\smallskip
+% -----------------------------------------------------------------------------------------------------------------------
+\ifindustry % >>> INDUSTRY
+	{\color{accent}\faLink\textbf{Talks \& posters:}}
+% -----------------------------------------------------------------------------------------------------------------------
+\else % >>> ACADEMIC
+	{\color{accent}\faLink\textbf{Complete list:}}
+% -----------------------------------------------------------------------------------------------------------------------
+\fi % >>> BOTH
+\href{https://dariotrinchero.github.io/talks/}{https://dariotrinchero.github.io/talks/}
