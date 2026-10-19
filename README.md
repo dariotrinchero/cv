@@ -37,6 +37,10 @@ The following Make targets are implemented:
 - `bg-industry`: as above, but for the industry version
 - `clean`: delete compilation artifacts
 
+The template files (the AltaCV class, bibliography styles and PDF metadata) live in
+`template/`, which `.latexmkrc` adds to TeX's search path; so compile via `latexmk` (as
+`make` does), not by running `pdflatex` directly.
+
 Note that AltaCV uses [`fontawesome5`](https://ctan.org/pkg/fontawesome5), but this
 is included in the latest versions of TeX Live and MikTeX.
 

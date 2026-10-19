@@ -20,7 +20,8 @@
 %   % >>> INDUSTRY   lines only in the industry version
 %   % >>> ACADEMIC   lines only in the academic version (after \else, or after \ifindustry\else)
 %   % >>> BOTH       back to lines shared by both versions (after \fi)
-% This comes before \documentclass, as the class reads the PDF metadata in cv.xmpdata as it loads.
+% This comes before \documentclass, as the class reads the PDF metadata in template/cv.xmpdata as it
+% loads.
 \newif\ifindustry
 \ifdefined\industry\industrytrue\fi
 
@@ -56,7 +57,7 @@
   \pdfglyphtounicode{uniFB04}{0066 0066 006C}
 \fi
 
-% Show the PDF's title (from cv.xmpdata) rather than its file name in the viewer's title bar
+% Show the PDF's title (from template/cv.xmpdata) rather than its file name in the viewer's title bar
 \hypersetup{pdfdisplaydoctitle}
 
 % Change the font if you want to, depending on whether
